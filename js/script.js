@@ -1,12 +1,12 @@
 var base = prompt("Enter the Base number");
 var exp = prompt("Enter the Exponent");
+ 
  if (base == '' || base == null || exp == '' || exp == null) 
    {console.log ('Error. Reload page and enter integer.')}
  else
    { 
     base = +base;
     exp = +exp;
-    console.log (base, exp);
     pow();
    } 
 
