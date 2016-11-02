@@ -1,27 +1,36 @@
 function pow() {
-  if ( checkNumber() ) {
-    result = checkExponentSign();
-    return result;
+  
+  if ( checkNumber(base) && checkNumber(exp) ) {
+    result = checkExponentSign(base, exp);
+
+    var hex = base.substring(0,2);
+
+    if (hex === '0X' || hex === '0x') {
+    console.log ('Result hex: ', base, '^', exp, '=', result.toString(16));
+    } else {
+      console.log ( 'Result: ', base, '^', exp, '=', result );
+      }
   }  
   else 
     console.log ('Error. Reload page and enter integer.');
+
 }
 
-function checkNumber() {
-  return !isNaN( parseFloat(base) ) && isFinite(base) && !isNaN( parseFloat(exp) ) && isFinite(exp) && parseInt(base) == base && parseInt(exp) == exp; 
+function checkNumber(a) {
+  return !isNaN( parseFloat(a) ) && isFinite(a) && parseInt(a) == a; 
 }
 
-function checkExponentSign() {
-  var result = 1;  
+function checkExponentSign(a, n) { //возвращает результат вовзведения числа "а" в степень "n"
+  var res = 1;  
   
-  if (exp >= 0) {
-      result = raise(base, exp, result);
+  if (n >= 0) {
+      res = raise(a, n, res);
   } else {
-      exp = -exp;
-      result = 1 / raise(base, exp, result);
+      n = -n;
+      res = 1 / raise(a, n, res);
     }
 
-  return result;
+  return res;
 }
 
 function raise(a, n, res) {
@@ -36,15 +45,7 @@ function raise(a, n, res) {
 var base = prompt("Enter the Base number");
 var exp = prompt("Enter the Exponent");
 
-var hex = base.substring(0,2);
-
-  if (hex === '0X' || hex === '0x') {
-    var result = pow();
-    console.log ('Result: ', base, '^', exp, '=', result.toString(16));
-  } else {
-    var result = pow();
-    console.log ( 'Result: ', base, '^', exp, '=', result );
-  }
+pow();
 
 
     
