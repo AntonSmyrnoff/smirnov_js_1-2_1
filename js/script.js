@@ -1,15 +1,17 @@
 function pow() {
-  if ( isNaN(base) || isNaN(exp) || parseInt (base) !== base || parseInt (exp) !== exp ) 
-    error()
+  if ( checkNumber() ) {
+    result = checkExponentSign();
+    return result;
+  }  
   else 
-    console.log ('Result: ', base, '^', exp, '=', check())
+    console.log ('Error. Reload page and enter integer.');
 }
 
-function error() {
-  console.log ('Error. Reload page and enter integer.');
+function checkNumber() {
+  return !isNaN( parseFloat(base) ) && isFinite(base) && !isNaN( parseFloat(exp) ) && isFinite(exp) && parseInt(base) == base && parseInt(exp) == exp; 
 }
 
-function check() {
+function checkExponentSign() {
   var result = 1;  
   
   if (exp >= 0) {
@@ -22,25 +24,32 @@ function check() {
   return result;
 }
 
-function raise(base, exp, result) {
-  for (var i = 0; i < exp; i++) {
-    result *= base;
+function raise(a, n, res) {
+  for (var i = 0; i < n; i++) {
+    res *= a;
   }
   
-  return result;
+  return res;
 }    
 
 
 var base = prompt("Enter the Base number");
 var exp = prompt("Enter the Exponent");
- 
-  if (base == '' || base == null || exp == '' || exp == null) 
-    error()
-  else { 
-    base = +base;
-    exp = +exp;
-    pow();
-  } 
+
+var hex = base.substring(0,2);
+
+  if (hex === '0X' || hex === '0x') {
+    var result = pow();
+    console.log ('Result: ', base, '^', exp, '=', result.toString(16));
+  } else {
+    var result = pow();
+    console.log ( 'Result: ', base, '^', exp, '=', result );
+  }
+
+
+    
+
+
 
 
 
